@@ -1,6 +1,6 @@
 # Custom Repeat Library Finding Pipeline
 
-Repeat identification for <i>Colletotrichum fructicola, Colletotrichum siamense, Colletotrichum aenigma </i> and <i>Colletotrichum higginsianum</i>.
+Repeat identification for *Colletotrichum fructicola, Colletotrichum siamense, Colletotrichum aenigma* and *Colletotrichum higginsianum*.
 
 ## Running the pipeline
 
@@ -192,10 +192,10 @@ RepeatMasker -lib CGSChig.nr.cons.cds.filtered.fa Nara.fsa -pa 16 -dir ./ -gff
 ```
 ## Acknowledgments
 The following resources were referred to while constructing this pipeline:
-* https://blaxter-lab-documentation.readthedocs.io/en/latest/repeat-masking.html
-* Coghlan et al. 2018 Protocol Exchange https://doi:10.1038/protex.2018.054
-* Castanera et al. 2016 PLOS Genetics https://doi.org/10.1371/journal.pgen.1006108
-* The very helpful Avrilomics blog by Avril Coghlan (http://avrilomics.blogspot.com)
+*  https://blaxter-lab-documentation.readthedocs.io/en/latest/repeat-masking.html
+*  Coghlan et al. 2018 Protocol Exchange https://doi:10.1038/protex.2018.054
+*  Castanera et al. 2016 PLOS Genetics https://doi.org/10.1371/journal.pgen.1006108
+*  The very helpful Avrilomics blog by Avril Coghlan (http://avrilomics.blogspot.com)
 
 
 ## Authors
