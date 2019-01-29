@@ -192,11 +192,11 @@ RepeatMasker -lib CGSChig.nr.cons.cds.filtered.fa Nara.fsa -pa 16 -dir ./ -gff
 ```
 ## Acknowledgments
 The following resources were referred to while constructing this pipeline:
-1.    https://blaxter-lab-documentation.readthedocs.io/en/latest/repeat-masking.html
-2.    Coghlan et al. 2018 Protocol Exchange https://doi:10.1038/protex.2018.054
-3.    Castanera et al. 2016 PLOS Genetics https://doi.org/10.1371/journal.pgen.1006108
-4.    The very helpful Avrilomics blog by Avril Coghlan (http://avrilomics.blogspot.com)
 
+*  https://blaxter-lab-documentation.readthedocs.io/en/latest/repeat-masking.html
+*  Coghlan et al. 2018 Protocol Exchange https://doi:10.1038/protex.2018.054
+*  Castanera et al. 2016 PLOS Genetics https://doi.org/10.1371/journal.pgen.1006108
+*  The very helpful Avrilomics blog by Avril Coghlan (http://avrilomics.blogspot.com)
 
 ## Authors
 
