@@ -179,7 +179,7 @@ awk '{print $1}' CGSChig.cat5.vs.RepeatPeps.25cul2.1e5.blastp.out |sort | uniq >
 Then, our custom library was searched for homology to CDS sequences corresponding to fungal proteins without homology to TEs.
 ```
 #Get CDS sequences without homology to TEs
-python ~/bin/scripts/exclude_fasta.py CGSChig.cat5.cds.fasta CGSChig.cat5.exclude.list > CGSChig.cat5.cds.noTEs.fasta
+python $CUSTOM_SCRIPTS/exclude_fasta.py CGSChig.cat5.cds.fasta CGSChig.cat5.exclude.list > CGSChig.cat5.cds.noTEs.fasta
 #BLASTn against custom library
 blastn -task megablast -query CGSChig.nr.cons.fa.classified -db CGSChig.cat5.cds.noTEs.fasta -outfmt 6 -max_target_seqs 25 -culling_limit 2 -num_threads 32 -evalue 1e-10 -out CGSChig.cat5.repeatmodeller.lib.vs.noTES.25cu2.1e10.megablast.out
 ```
@@ -192,10 +192,10 @@ RepeatMasker -lib CGSChig.nr.cons.cds.filtered.fa Nara.fsa -pa 16 -dir ./ -gff
 ```
 ## Acknowledgments
 The following resources were referred to while constructing this pipeline:
-*  https://blaxter-lab-documentation.readthedocs.io/en/latest/repeat-masking.html
-*  Coghlan et al. 2018 Protocol Exchange https://doi:10.1038/protex.2018.054
-*  Castanera et al. 2016 PLOS Genetics https://doi.org/10.1371/journal.pgen.1006108
-*  The very helpful Avrilomics blog by Avril Coghlan (http://avrilomics.blogspot.com)
+1. https://blaxter-lab-documentation.readthedocs.io/en/latest/repeat-masking.html
+2. Coghlan et al. 2018 Protocol Exchange https://doi:10.1038/protex.2018.054
+3. Castanera et al. 2016 PLOS Genetics https://doi.org/10.1371/journal.pgen.1006108
+4. The very helpful Avrilomics blog by Avril Coghlan (http://avrilomics.blogspot.com)
 
 
 ## Authors
