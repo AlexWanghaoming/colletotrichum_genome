@@ -1,6 +1,5 @@
 import re
 import argparse
-#Sample usage: python parse_gff_to_fasta.py -gff Nara.fsa.TPSI.allHits.chains.bestPerLocus.gff3 -ID 1 -fasta /home/Pam/submissions/repeats/Nara/Nara.fsa -feature translated_nucleotide_match
 
 parser = argparse.ArgumentParser(description='Pull features of interest from a gff. Follow up with fasta_formatter -in inputfasta -out outputfasta -w 60 to get properly wrapped fastafile')
 parser.add_argument('-gff', metavar='gff', type=str,
