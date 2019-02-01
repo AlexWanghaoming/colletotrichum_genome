@@ -198,6 +198,7 @@ python location_of_telomeric_repeats.py -fasta inputmultifastafile > output.gff
 
 ## Acknowledgments
 The following resources were referred to while constructing this pipeline:
+
 *  https://blaxter-lab-documentation.readthedocs.io/en/latest/repeat-masking.html
 *  Coghlan et al. 2018 Protocol Exchange https://doi:10.1038/protex.2018.054
 *  Castanera et al. 2016 PLOS Genetics https://doi.org/10.1371/journal.pgen.1006108
