@@ -1,4 +1,4 @@
-# Custom Repeat Library Finding Pipeline
+# Custom Repeat Library Building Pipeline
 
 Repeat identification for *Colletotrichum fructicola, Colletotrichum siamense, Colletotrichum aenigma* and *Colletotrichum higginsianum*.
 
