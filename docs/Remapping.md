@@ -24,12 +24,15 @@ bowtie2-build Nara.fsa Nara
 Perform read mapping. For 100 bp paired-end reads of 500 bp insert-sized libraries pretrimmed with trimgalore
 ```
 bowtie2 -x Nara --end-to-end --fr -p 32 -X 700 -I 400 --very-sensitive -1 $1_500_R1_val_1.fq.gz -2 $1_500_R2_val_2.fq.gz -S $1.500.Nararef.bt2.sam
-samtools view -b -S -@ 8 $1.500.Nararef.bt2.sam| samtools sort -@ 8 -n -o $1.500.Nararef.bt2.nsort.bam
+samtools view -b -S -@ 32 $1.500.Nararef.bt2.sam| samtools sort -@ 32 -o $1.500.Nararef.bt2.sort.bam
+samtools index $1.500.Nararef.bt2.sort.bam
 
-#Remove duplicates
+#Remove duplicate reads
+samtools sort -n -o $1.500.Nararef.bt2.nsort.bam $1.500.Nararef.bt2.sort.bam
 samtools fixmate -@ 8 -m $1.500.Nararef.bt2.nsort.bam $1.500.Nararef.bt2.fm.bam
 samtools sort -@ 8 -o $1.500.Nararef.bt2.sort.fm.bam $1.500.Nararef.bt2.fm.bam
 samtools markdup -@ 8 -r $1.500.Nararef.bt2.sort.fm.bam $1.500.Nararef.bt2.sort.md.bam
+samtools index $1.500.Nararef.bt2.sort.md.bam
 ```
 Where $1 = strain name
 
