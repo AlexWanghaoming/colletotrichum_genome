@@ -45,6 +45,8 @@ In R
 raw <-read.csv("rawsubreadcounts.parsed.txt",sep="\t",row.names=1)
 library(edgeR)
 
+x<-as.factor(substring(colnames(raw),1,6))
+
 #Filter by expression
 
 y<-DGEList(counts=raw,group=x)
