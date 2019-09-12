@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import re
 import argparse
 
@@ -77,7 +78,10 @@ def get_fasta_from_plus_intervals(intervaldic,fastafile):
 def get_fasta_from_minus_intervals(intervaldic,fastafile):
     for feature, value in intervaldic.items():
         print(">"+feature)
+        #
+        value.sort()
         value.reverse()
+        print(value)
         for interval in value:
              chrom = interval[0]
              start = interval[1]
