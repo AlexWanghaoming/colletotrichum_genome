@@ -81,7 +81,6 @@ def get_fasta_from_minus_intervals(intervaldic,fastafile):
         #
         value.sort()
         value.reverse()
-        print(value)
         for interval in value:
              chrom = interval[0]
              start = interval[1]
