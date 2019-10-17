@@ -3,6 +3,8 @@ import argparse
 from argparse import RawTextHelpFormatter
 import pandas as pd
 
+#This script uses bedtools rather than biopython and is much quicker than parse_gff_to_fasta.py and uses fasta_formatter from the fastx-toolkit to reformat outputs.
+
 parser = argparse.ArgumentParser(description="""Getfasta from gff using bedtools getfasta. Will merge features that are split.
 Example usage to get CDS with two separators:
 parse_gff_to_fasta2.py -gff test.gff -feature exon -num 1 -s orig_protein_id= -s \;orig_transcript -fasta ref.fa -outfile out.fasta""",
@@ -54,12 +56,11 @@ def import_gff_create_tmp(gff,feature,fieldnum):
                     field = field0[fieldnum]
                     l = lines+"\t"+field+"\n"
                     tmpout.write(l)
+
 def get_featurename(gff):
     """Get names that will be used for fastaheaders and get start sites relative to start of document"""
     df = pd.read_csv(gff+".tmp",sep="\t",header=None)
-    #seps = sep1+"|"+sep2
-    #df2 = df[8].str.split(seps,expand=True)
-    #df2 = df[8].str.split("orig_protein_id=|;orig_transcript_id",expand=True)
+    df = df.sort_values([0,3])
     df["ID"] = df[9]
     df["len"] = df[4]-df[3]+1
     df3 = df.groupby(["ID"]).min().reset_index()
@@ -70,9 +71,7 @@ def get_featurename(gff):
     df4.columns = ["ID","CDSend"]
     mdf = pd.merge(df,df3,on="ID")
     mdf = pd.merge(mdf,df4,on="ID")
-    #mdf["plusfeaturestart"] = mdf[3]-mdf["CDSstart"]
     mdf["blockstart"] = mdf[3]-mdf["CDSstart"]
-    #mdf["minusfeaturestart"] = mdf["CDSend"]-mdf[4]
     sdf = mdf.sort_values(["ID",3])
     sdf["bedstart"] = sdf[3]-1
     df5 = df.groupby(["ID"]).count().reset_index()
@@ -82,11 +81,8 @@ def get_featurename(gff):
     sdf2["bedCDSstart"] = sdf2["CDSstart"]-1
     sdf2 = sdf2[["ID","count","bedCDSstart",0,6,"len","CDSstart","CDSend","blockstart","bedstart"]]
     sdf2 = sdf2.rename(columns={0:"seq",6:"strand"})
-    #plusseqlist = sdf2["ID"][sdf2["strand"]=="+"].drop_duplicates().tolist()
-    #minusseqlist = sdf2["ID"][sdf2["strand"]=="-"].drop_duplicates().tolist()
     seqlist = sdf2["ID"].drop_duplicates().tolist()
     return sdf2,seqlist
-
 
 def sql_queries2(sdf2,seqlist):
     from sqlalchemy import create_engine

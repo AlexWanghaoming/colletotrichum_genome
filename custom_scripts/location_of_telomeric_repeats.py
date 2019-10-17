@@ -13,7 +13,7 @@ multifastafile  = args.fasta
 records = list(SeqIO.parse((multifastafile),"fasta"))
 def find_sequence(motif,sequence,sequencename,strand):
     from re import finditer
-    for match in finditer(motif,sequence):
+    for match in finditer(motif,sequence,flags=re.IGNORECASE):
         start,end = match.span()
         start = start+1
         end = end

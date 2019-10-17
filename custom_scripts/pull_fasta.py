@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import argparse
+import sys
 from Bio import SeqIO
 
 parser = argparse.ArgumentParser(description='Run as follows: pull_fasta.py -f fasta -l list > output.fasta')
