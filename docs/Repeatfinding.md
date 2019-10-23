@@ -185,10 +185,10 @@ In addition, transposonPSI was used to annotate the library.
 ```
 perl transposonPSI.pl CGSChig.nr.cons.fa nuc
 ```
-TransposonPSI annotations were used if repeats were not classified by RepeatClassifier. Sequences that were not annotated by both programs were annotated as "Unknown". Fastaheaders were adjusted to fit the format recognized by RepeatModeler (e.g. Rep_nn#LTR/Copia)
+TransposonPSI annotations were used if repeats were not classified by RepeatClassifier. Sequences that were not annotated by both programs were annotated as "Unknown". Fastaheaders were adjusted to fit the format recognized by RepeatModeler (e.g. rc_nn#LTR/Copia)
 
 ## 3. Filter out protein coding sequences
-Some of the sequences that are not classified ("Unknown") could include multigene families. To remove these, filter repeats against coding sequences that are not related to transposable elements.
+Some of the sequences could include sequences from multigene families. To remove these, filter repeats against coding sequences that are not related to transposable elements.
 
 To identify coding sequences that are not related to transposable elements, the predicted proteomes of genomes of interest were used as queries against the RepeatPep database.
 
@@ -208,7 +208,12 @@ python $CUSTOM_SCRIPTS/exclude_fasta.py cat5.cds.fasta CGSChig.cat5.exclude.list
 makeblastdb -in CGSChig.cat5.cds.noTEs.fasta -out ./CGSChig.cat5.cds.noTEs.fasta -dbtype nucl
 blastn -task megablast -query CGSChig.nr.cons.fa -db CGSChig.cat5.cds.noTEs.fasta -outfmt 6 -max_target_seqs 25 -culling_limit 2 -num_threads 32 -evalue 1e-10 -out CGSChig.megablast.out
 ```
-Sequences with a BLASTn hit against the CDS sequences and which were not annotated by RepeatClassifier or TransposonPSI were excluded from the final repeat library.
+Sequences with a BLASTn hit against the CDS sequences were excluded from the final repeat library.
+```
+awk '{print $1}' CGSChig.megablast.out |sort|uniq > CGSChig.exclude
+python $CUSTOM_SCRIPTS/exclude_fasta.py CGSChig.nr.cons.fa CGSChig.exclude > CGSChig.nr.cons.cds.filtered.fa
+```
+
 
 ### Add taxon-specific repeats from RepBase
 To add known Colletotrichum repeats from RepBase (excluding those that were annotated as artefacts, simple repeats and low complexity sequences).
