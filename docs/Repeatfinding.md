@@ -231,12 +231,17 @@ RepeatMasker was used to annotate each genome
 ```
 RepeatMasker -lib CGSChig.nr.cons.cds.filtered.rb.fa Nara.fsa -pa 16 -dir ./ -gff
 ```
-## Annotation of subtelomeric repeats
-A custom script was written to identify the locations of the subtelomeric repeat (TTAGGG)
-```
-python location_of_telomeric_repeats.py -fasta inputmultifastafile > output.gff
-```
+Final repeat library: [CGSChig.nr.cons.cds.filtered.rb.fa](additional_data/CGSChig.nr.cons.cds.filtered.rb.fa)
 
+## Annotation of telomeric repeats
+Custom scripts were written to identify the locations of the telomeric repeat (TTAGGG). For these scripts, the conda environment pybedtools was used.
+```
+python find_telomeric_repeats.py -f inputfasta -o output.gff
+```
+Identify potential telomeric regions based on density of telomeric repeats across windows of specified intervals. Only intervals which are greater than the percentile specified will be reported (e.g. for -pc 95, only the top 5% intervals ranked by density of telomeric repeats will be given). Output will be a bed format file.
+```
+python identify_potential_telomeres.py -f fastafile -w windowsize -g bedtoolsgenomefile -o outputfile -pc percentile
+```
 ## Acknowledgments
 
 The following resources were referred to while constructing this pipeline:

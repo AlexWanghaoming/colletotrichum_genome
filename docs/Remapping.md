@@ -11,9 +11,8 @@ Programs used
 ```
 bowtie2 v2.3.4.1
 samtools v1.8
-blasr
-bamCoverage (from the deeptools 3.1.3 package:https://deeptools.readthedocs.io/en/develop/content/tools/bamCoverage.html)
-unique-kmers.py (from khmer version 3.0.0a2)
+bedtools v2.29.2
+ngmlr v0.2.7
 ```
 ### For paired-end illumina reads
 
@@ -36,21 +35,25 @@ samtools index $1.500.Nararef.bt2.sort.md.bam
 ```
 Where $1 = strain name
 
-### For RPKM normalized read depth values
+### For PacBio reads
+```
+zcat $1.PB.fastq.gz|ngmlr -t 8 -r /home/Pam/submissions/repeats/Nara/Nara.fsa > $1.PB.Nara.ng.sam
+samtools view -@ 8 -bS $1.PB.Nara.ng.sam > $1.PB.Nara.ng.bam
+samtools sort -@ 8 -o $1.PB.Nara.ng.sort.bam $1.PB.Nara.ng.bam
+rm $1.PB.Nara.ng.sam
+rm $1.PB.Nara.ng.bam
+```
+### For read depths
 
-Estimate Effective Genome Size
+Make windows of 10 kb in size throughout the whole genome
 ```
-unique-kmers Nara.fsa
+
+bedtools makewindows -g Nara.genome -w 10000 > Nara.10k.windows.bed
 ```
-Calculate normalized read depths
+Count number of reads per 10 kb
 ```
-samtools index $1.500.Nararef.bt2.sort.md.bam -@ 32
-bamCoverage --bam $1.500.Nararef.bt2.sort.md.bam --outFileName $1.bcdt.rpkm.bedgraph --outFileFormat bedgraph -p 32 --binSize 10000 --normalizeUsing RPKM --effectiveGenomeSize 57859888
+bedtools coverage -a Nara.10k.windows.bed -b $1.sort.md.bam > $1.Nara.10k.bedtoolscoverage.bed
 ```
 where $1 = strain name
 
-To draw heatmaps, see [Remapping jupyter notebook](../jupyter_notebooks/merge_bcdt_rpkm_output_final.ipynb)
-
-## Acknowledgments
-
-The following resources were referred to while constructing this pipeline:
+For plots, see [Remapping jupyter notebook](../jupyter_notebooks/Plots_of_depths_coverage_densities.ipynb)
