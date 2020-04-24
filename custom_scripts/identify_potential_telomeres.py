@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Apr  9 20:40:56 2020
 
-@author: Pam
-"""
 import argparse,os
-import custom_functions as fn
+import find_seq as fn
 
 parser = argparse.ArgumentParser(description='Identify potential telomeres based on density of TTAGGG repeats')
 parser.add_argument('-f', metavar='fasta', type=str,
@@ -18,7 +14,7 @@ parser.add_argument('-g', metavar='genomefile', type=str,
 parser.add_argument('-o', metavar='outfilename', type=str,
                      help='output filename')
 parser.add_argument('-pc', metavar='percentile', type=float,
-                     help='Example: for 95, only top 5% of intervals ranked by density of TTAGGG repeats will be reported')
+                     help='Example: for 95, only top 5 percent of intervals ranked by density of TTAGGG repeats will be reported')
 args = parser.parse_args()
 
 fasta = args.f

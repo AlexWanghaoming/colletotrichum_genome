@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Apr  9 20:40:56 2020
 
-@author: Pam
-"""
 import argparse
 import find_seq as fn
 
@@ -20,4 +16,3 @@ outfilename = args.o
 
 
 fn.make_telomere_gff(fasta,outfilename)
-

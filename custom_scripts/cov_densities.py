@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Apr  9 23:21:55 2020
 
-@author: Pam
-"""
 def make_genomefile(fasta,outfilename):
     import os
     #Requires samtools
@@ -12,7 +8,7 @@ def make_genomefile(fasta,outfilename):
     cmd2 = '''awk '{print $1"\t"$2}' '''+fasta+".fai > "+outfilename
     os.system(cmd)
     os.system(cmd2)
-    
+
 def make_windowsfile(genomefile,window,sliding=None,prefix=None):
     from pybedtools import BedTool
     if prefix !=None:
@@ -34,7 +30,7 @@ def import_genegff(genegff):
     return allgenesdf
 
 def get_goi_loc(allgenesdf,genelist):
-    #Make bedfile for location of specific genes of interest in a list of genes. Input is a text file 
+    #Make bedfile for location of specific genes of interest in a list of genes. Input is a text file
     #of a list of genenames and a dataframe of all genes and their locations
     import pandas as pd
     from pybedtools import BedTool
@@ -61,4 +57,3 @@ def genomewide_cov(genomefile,window,feature,sliding=None,prefix=None):
     df = pd.read_csv(cov.fn,sep="\t",names=["chr","start","end","count","bases","len","cov"])
     df["mid"]=(df["start"]+df["end"])/2
     return df
-
