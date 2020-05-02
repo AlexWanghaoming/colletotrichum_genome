@@ -1,6 +1,8 @@
 # Overview
 This is a repository for the *Colletotrichum gloeosporioides* species complex sequencing project from the Shirasu lab.
 
+Preprint available at:https://www.biorxiv.org/content/10.1101/2020.04.28.061093v1
+
 # Sections
 ---
 
